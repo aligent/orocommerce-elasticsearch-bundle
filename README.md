@@ -20,7 +20,7 @@ Divante Elasticsearch Bundle is a bundle for Oro Commerce which enables using El
 1. Search autocomplete
 
 ## Compatibility
-This module is compatible with Oro Commerce 1.3
+This module is compatible with Oro Commerce 1.6, using Elastic Search 5.3.*
 
 ## Installing/Getting started
 

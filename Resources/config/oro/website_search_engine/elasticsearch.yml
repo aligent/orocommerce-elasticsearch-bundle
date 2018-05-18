@@ -18,7 +18,7 @@ services:
 
     divante_elasticsearch.elastica:
         class: '%divante_elasticsearch.client.class%'
-        arguments: [{ host: '%elasticsearch_host%', port: '%elasticsearch_port%' }]
+        arguments: [{ host: '%elasticsearch_host%', port: '%elasticsearch_port%', username: '%elasticsearch_username%', password: '%elasticsearch_password%' }]
         calls:
             - [setStopwatch, ['@?debug.stopwatch']]
             - [setLogger, ['@divante_elasticsearch.logger']]
@@ -43,7 +43,8 @@ services:
         calls:
             - [setClient, ['@divante_elasticsearch.elastica']]
             - [setEventDispatcher, ['@event_dispatcher']]
-            - [setIndexName, ['%divante_elasticsearch.index.name']]
+            - [setIndexName, ['%divante_elasticsearch.index.name%']]
+            - [setIndexSettings, ["%divante_elasticsearch.index.settings%"]]
 
     oro_website_search.engine:
         class: '%oro_website_search.engine.class%'
