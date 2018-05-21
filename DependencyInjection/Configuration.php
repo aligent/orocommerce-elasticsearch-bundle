@@ -15,6 +15,13 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
+     *
+     */
+    const DEFAULT_INDEX_SETTINGS = [
+        "index.mapping.total_fields.limit" => 5000
+    ];
+
+    /**
      * {@inheritdoc]
      */
     public function getConfigTreeBuilder()
@@ -30,9 +37,12 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('type')
                 ->cannotBeEmpty()
                 ->defaultValue('oro_product_1')
+            ->end()
+            ->arrayNode("index_settings")
+                ->prototype('scalar')->end()
+                ->defaultValue(static::DEFAULT_INDEX_SETTINGS)
             ->end();
 
         return $treeBuilder;
-
     }
 }

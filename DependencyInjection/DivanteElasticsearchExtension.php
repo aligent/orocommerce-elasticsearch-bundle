@@ -31,6 +31,16 @@ class DivanteElasticsearchExtension extends Extension
 
         $container->setParameter('divante_elasticsearch.index.name', $config['index']);
         $container->setParameter('divante_elasticsearch.type.name', $config['type']);
+        $container->setParameter('divante_elasticsearch.index.settings', $config['index_settings']);
+
+        // Allow username and password to be passed as optional parameters
+        if (!$container->hasParameter('elasticsearch_username')) {
+            $container->setParameter('elasticsearch_username', null);
+        }
+
+        if (!$container->hasParameter('elasticsearch_password')) {
+            $container->setParameter('elasticsearch_password', null);
+        }
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

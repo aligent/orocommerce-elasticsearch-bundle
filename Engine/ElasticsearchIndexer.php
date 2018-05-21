@@ -39,6 +39,11 @@ class ElasticsearchIndexer extends AbstractIndexer
     protected $indexName;
 
     /**
+     * @var array
+     */
+    protected $indexSettings;
+
+    /**
      * @inheritDoc
      */
     public function reindex($classOrClasses = null, array $context = [])
@@ -68,7 +73,9 @@ class ElasticsearchIndexer extends AbstractIndexer
         $entityClassesToIndex = $this->getClassesForReindex($entityClassesToIndex);
 
         $index = $this->getIndex();
-        $indexData = [];
+        $indexData = [
+            "settings" => $this->indexSettings
+        ];
         $index->create($indexData, true);
 
 
@@ -242,5 +249,13 @@ class ElasticsearchIndexer extends AbstractIndexer
     public function setIndexName($indexName)
     {
         $this->indexName = $indexName;
+    }
+
+    /**
+     * @param array $indexSettings
+     */
+    public function setIndexSettings(array $indexSettings)
+    {
+        $this->indexSettings = $indexSettings;
     }
 }
